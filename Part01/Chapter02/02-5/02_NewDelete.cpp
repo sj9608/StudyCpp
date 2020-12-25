@@ -3,17 +3,19 @@
 #include <stdlib.h>
 using namespace std;
 
-char * MakeStrAdr(int len)
+char *MakeStrAdr(int len)
 {
-    char * str = (char*)malloc(sizeof(char) * len);
+    char *str = new char[len];
     return str;
 }
 
 int main(void)
 {
-    char * str = MakeStrAdr(20);
-    strcpy(str, "I am so happy");
+    char *str = MakeStrAdr(20);
+    strcpy(str, "i am happy~");
+
     cout << str << endl;
 
+    delete[] str;
     return 0;
 }
