@@ -10,11 +10,17 @@ void FruitBuyer::InitMembers(int money)
 
 void FruitBuyer::BuyApples(FruitSeller &seller, int money)
 {
+    if(money < 0)
+    {
+        cout << "잘못 입력함" << endl;
+        return;
+    }
+    
     numOfApples += seller.SaleApples(money);
     myMoney -= money;
 }
 
-void FruitBuyer::ShowBuyResult()
+void FruitBuyer::ShowBuyResult() const
 {
     cout << "현재 잔액 : " << myMoney << endl;
     cout << "사과 개수 : " << numOfApples << endl << endl;

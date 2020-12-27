@@ -11,6 +11,6 @@ private:
 public:
     void InitMembers(int money);
     void BuyApples(FruitSeller &seller, int money);
-    void ShowBuyResult();
+    void ShowBuyResult() const;
 };
 #endif
