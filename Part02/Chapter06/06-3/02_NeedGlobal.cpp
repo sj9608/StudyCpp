@@ -17,6 +17,11 @@ public:
 class SoComplex
 {
 public:
+    SoComplex(const SoComplex &copy)
+    {
+        cmxObjCnt++;
+        cout << cmxObjCnt << "번 째 SoComple 객체" << endl;
+    }
     SoComplex()
     {
         cmxObjCnt++;
