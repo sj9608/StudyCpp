@@ -66,3 +66,35 @@ int SoSimple::simObjCnt = 0;
 **Static 멤버변수의 또 다른 접근방법**
 static 멤버 변수는 어디서든 접근이 가능한 변수이다. static 멤버 변수가 private으로 선언되면 해당 클래스의 객체들만 접근이 가능하지만. public으로 선언되면 클래스의 이름 또는 객체의 이름을 통해서 어디서든 접근이 가능하다. 또 **static 멤버변수가 객체 내에 존재하지 않는다**는 사실도 더불어 증명하고있다. (static 멤버변수는 객체 외부에 존재함)
 > 04_PublicStaticMember.cpp 예제 확인
+
+**static 멤버 함수**
+static 멤버 함수 역시 그 특성이 static 멤버 변수와 동일하다.
+* 선언된 클래스의 모든 객체가 공유한다.
+* public으로 선언이 되면, 클래스의 이름을 이용해서 호출이 가능하다.
+* **객체의 멤버로 존재하는 것이 아니다.**
+
+객체의 멤버로 존재하지 않는다는 사실이 아래와 같은 코드에서 컴파일 에러를 일으킨다.
+``` C++
+class SoSimple
+{
+private:
+    int num1;
+    static int num2;
+public:
+    SoSimple(int n) : num1(n) { }
+    static void Adder(int n)
+    {
+        num1 += n; // ❗️ 컴파일 에러 발생
+        num2 += n;
+    }
+};
+int SoSimple::num2 = 0;
+```
+위 예제를 통해 하나의 사실을 유추할 수 있다.
+> "static 멤버함수 내에서는 static 멤버 변수와 static 멤버함수만 호출이 가능하다"
+
+**const static 멤버**
+클래스 내에 선언된 const 멤버변수(상수)의 초기화는 이니셜라이저를 통해야만한다.
+그러나 const static으로 선언되는 멤버변수(상수)는 다음과 같이 선언과 동시에 초기화가 가능하다.
+> 05_ConstStaticMember.cpp 예제확인
+> 
