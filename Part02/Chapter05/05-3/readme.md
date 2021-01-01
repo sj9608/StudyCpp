@@ -53,10 +53,20 @@ int main(void)
 위 예제를 통해 함수에 인자를 전달하는 과정에서 복사 생성자가 호출됨을 확인 하였다. 그리고 이로 인해 멤버변수 num에 저장된 값이 복사 되는것도 확인하였다.
 
 아래의 그림은 복사 생성자의 호출관계 이다.
-![image](https://user-images.githubusercontent.com/52594760/103434054-13934000-4c3f-11eb-9758-9ef6c48ad410.png)
+<img width="400" alt="image" src="https://user-images.githubusercontent.com/52594760/103434208-6b32ab00-4c41-11eb-907f-4da9bb79dd36.png">
+
 
 초기화의 대상은 obj객체가 아닌 ob객체이다. 그리고 ob객체는 obj객체로 초기화된다.
 ob객체의 복사 생성자가 호출되면서, obj객체가 인자로 전달된 것이다.
 
 다음 예제를 통해 복사 생성자가 호출되는 세번째 경우를 확인하자.
 > 02_ReturnObjCopycon.cpp
+
+이 예제에 대한 설명을 첨부한 아래그림을 확인하자.
+
+우선 매개변수로 전달한 ob객체의 생성(복사생성)이 일어난뒤 반환에 의한 복사 생성자 호출이 일어난다.
+<img width="400" alt="image" src="https://user-images.githubusercontent.com/52594760/103434202-4d654600-4c41-11eb-8e41-321a71a31a11.png">
+
+**반환할 때 만들어진 객체는 언제 사라지나?**
+아래의 코드를 보고 실행결과를 예측해 보자.
+> 03_IKnowTempObj.cpp 확인 후 실행화면 예측
