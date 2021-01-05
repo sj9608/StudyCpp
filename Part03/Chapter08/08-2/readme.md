@@ -155,3 +155,36 @@ public:
 ✅ 또 하나는 Employee 클래스의 가상 함수는 유도클래스의 함수 호출을 돕는데 의미가 있는, 실제로 실행되는 함수가 아니었는데 이를 명확히 명시하는 효과도 생겼다.
 
 그리고 이렇듯 하나 이상의 멤버함수를 순수 가상함수로 선언한 클래스를 가리켜 '추상 클래스' 라 한다.
+
+**다형성**
+지금까지 설명한 가상함수의 호출관계에서 보인 특성을 가리켜 '다형성' 이라 한다. 그리고 이는 객체지향을 설명하는데 있어서 매우 중요한 요소이다.
+
+한 마디로 이렇게 이야기 할 수 있다.
+> '문장은 같은데 결과는 다르다'
+``` C++
+class First
+{
+public:
+    virtual void MyFunc() {cout << "First" << endl; }
+};
+
+class Second:: public First
+{
+public:
+    virtual void MyFunc() { cout << "Second" << endl; }
+};
+
+int main(void)
+{
+    First * ptr = new First();
+    ptr->MyFunc();
+    delete ptr;
+
+    Seoncd * ptr = new Second();
+    ptr->MyFunc();
+    delete ptr;
+
+    return 0;
+}
+```
+위 메인 함수에서 ptr->MyFunc(); 문장이 두번 나온다. ptr은 동일한 포인터 변수이다. 그럼에도 불구하고 실행결과는 다르다. 포인터 변수의 ptr이 참조하는 객체의 자료형이 다르기 때문이다. 이것이 바로 C++ 에서의 '다형성'의 예 이다.
