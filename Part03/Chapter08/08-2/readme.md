@@ -81,3 +81,10 @@ public:
 
 > 02_FunctionVirtualOverride.cpp
 
+**오렌지 미디어 급여관리 확장성 문제 의 완전한 해결**
+> 08-1 의 03_EmployeeManager3.cpp 에서 문제가 되어 주석 처리 했던 부분 을 확인하자.
+
+배열을 구성하는 포인터 변수가 Employee 형 포인터 변수이므로 Employee 클래스 멤버가 아닌 GetPay 함수와 ShowSalaryInfo 함수 호출 부분에서 컴파일 에러를 발생시키기 때문에 주석처리를 해두었다.
+
+그렇다면 이 문제를 어떻게 해결해야할까? 
+> 예제 03_EmployeeManager04.cpp 를 작성 해보자
