@@ -81,6 +81,11 @@ public:
 
 > 02_FunctionVirtualOverride.cpp
 
+위 예제를 통해 알 수 있는 사실은 다음과 같다.
+
+  ✅ 함수가 가상함수로 선언되면, 해당 함수 호출시, 포인터의 자료형을 기반으로 호출대상을 결정하지 않고 포인터 변수가 실제로 가리키는 객체를 참조하여 호출의 대상을 결정한다.
+
+
 **오렌지 미디어 급여관리 확장성 문제 의 완전한 해결**
 > 08-1 의 03_EmployeeManager3.cpp 에서 문제가 되어 주석 처리 했던 부분 을 확인하자.
 
@@ -88,3 +93,65 @@ public:
 
 그렇다면 이 문제를 어떻게 해결해야할까? 
 > 예제 03_EmployeeManager04.cpp 를 작성 해보자
+
+위 예제에선 기본 예제의 Employee 클래스에 GetPay 함수와 ShowSalaryInfo 함수를 정의하고 가상함수로 선언하였다.
+
+이를통해 기존 확장성 문제의 해결은 완료되었다.
+
+---
+**오렌지 미디어 급여 관리 확장성 문제의 해결을 통해서 확인한 상속의 이유**
+> 상속을 하는 이유는 무엇인가?
+
+✅ 상속을 통해 연관된 일련의 클래스에 대해 공통적인 규약을 정의할 수 있다.
+
+조금 생소하지만 위 문제에 대해 적용해 보자면 다음과 같다.
+> 상속을 통해 연관된 일련의 클래스 PermanentWorker, TemporaryWorker, SalesWorker 에 공통적인 규약을 정의할 수 있다.
+
+위 클래스에 적용된 공통적인 규약은 Employee 클래스 이다.
+다르게 말하면 , 적용하고싶은 공통규약을 모아서 Employee 클래스를 정의한 것이 된다.
+
+이로 인해서 Employee 클래스를 상속하는 모든 클래스의 객체는 Employee 객체로 바라볼 수 있게 된 것이다.
+
+**순수 가상함수(Pure Virutal Fucntion)와 추상 클래스(Abstract Class)**
+
+예제 03_EmployeeManager4.cpp 의 Employee 클래스를 다시 한번 관찰하자. 이 클래스는 조금 더 개선할 여지가 남아있다.
+
+``` C++
+class Employee
+{
+private:
+    char name[100];
+public:
+    Employee(char * name) { . . . }
+    void ShowYourName() const { }
+    virtual int GetPay() const { . . . }
+    virtual void ShowSalaryInfo() const
+    { }
+};
+```
+이 클래스는 기초 클래스로서만 의미를 가질 뿐, 객체의 생성을 목적으로 정의된 클래스는 아니다. 이렇듯 **클래스 중에서는 객체생성을 목적으로 정의되지 않는 클래스가 존재한다.** 따라서 다음과 같은 문장은 프로그래머의 실수를 유발한다.
+```C++
+Employee * emp = new Employee("LEE");
+```
+하지만 이는 문법적으로 아무런 문제가 없는 문장이다. 이러한 경우에 가상함수를 **순수 가상함수**로 선언하여 객체의 생성을 문법적으로 막는 것이 좋다.
+
+``` C++
+class Employee
+{
+private:
+    char name[100];
+public:
+    Employee(char * name) { . . . }
+    void ShowYourName() const { }
+    virtual int GetPay() const = 0; ❗️
+    virtual void ShowSalaryInfo() const = 0; ❗️
+};
+```
+
+**순수 가상함수란 함수의 몸체가 정의되지 않은 함수를 의미한다.** 그리고 이를 표현하기 위해 위와 같이 표시한다.
+
+이로인해 두가지 이점을 얻었다.
+✅ 하나는 객체의 잘못된 생성을 막을 수 있다는 것이고.
+✅ 또 하나는 Employee 클래스의 가상 함수는 유도클래스의 함수 호출을 돕는데 의미가 있는, 실제로 실행되는 함수가 아니었는데 이를 명확히 명시하는 효과도 생겼다.
+
+그리고 이렇듯 하나 이상의 멤버함수를 순수 가상함수로 선언한 클래스를 가리켜 '추상 클래스' 라 한다.
