@@ -1,0 +1,40 @@
+#include <iostream>
+#include "header/AccountHandler.h"
+
+using namespace std;
+
+enum { MAKE = 1, DEPOSIT, WITHDRAW, INQUIRE, EXIT };
+
+int main(void)
+{
+    AccountHandler manager;
+    int choice;
+
+    while(1)
+    {
+        manager.ShowMenu();
+        cout << endl << "메뉴 선택 : ";
+        cin >> choice;
+
+        switch (choice)
+        {
+        case MAKE:
+            manager.MakeAccount();
+            break;
+        case DEPOSIT:
+            manager.DepositMoney();
+            break;
+        case WITHDRAW:
+            manager.WithdrawMoney();
+            break;
+        case INQUIRE:
+            manager.ShowAllAccInfo();
+            break;
+        case EXIT:
+            return 0;
+        default:
+            cout << "Illegal Selection . . ." << endl;
+            break;
+        }
+    }
+}
