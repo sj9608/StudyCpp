@@ -92,7 +92,7 @@ Part 03 객체지향의 전개
 
 [궁금함]
 ---
-1. 매개변수로 char* 로 하는 함수에 string literal을 전달 하였을 때 발생하는 경고 문구
+**1. 매개변수로 char\* 로 하는 함수에 string literal을 전달 하였을 때 발생하는 경고 문구**
 
 ![image](https://user-images.githubusercontent.com/52594760/103165760-defa3f80-485e-11eb-83e0-cab264003d29.png)
 
@@ -101,6 +101,11 @@ Part 03 객체지향의 전개
 
 해결 :
 ![image](https://user-images.githubusercontent.com/52594760/103165944-1ff35380-4861-11eb-9465-ef310e00171f.png)
+
+
+**2. 연산자 오버로딩에서 교환법칙이 성립하기 위해서 멤버함수로의 오버로딩과 전역함수로의 오버로딩 모두 정의해야 하는가??**
+
+
 
 ---
 
