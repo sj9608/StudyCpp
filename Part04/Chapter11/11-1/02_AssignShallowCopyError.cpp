@@ -20,6 +20,16 @@ public:
         cout << "나이 : " << age << endl;
     }
 
+    Person& operator=(const Person& ref)
+    {
+        delete []name;
+        int len = strlen(ref.name) + 1;
+        name = new char[len];
+        strcpy(name, ref.name);
+        age = ref.age;
+        return *this;
+    }
+    
     ~Person()
     {
         delete []name;
