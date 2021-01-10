@@ -8,7 +8,7 @@
             "name": "g++ - Build and debug active file",
             "type": "cppdbg",
             "request": "launch",
-            "program": "/Users/kinotz/WorkSpace/C++/Part04/Chapter10/10-4/01_ConsoleOutput",
+            "program": "/Users/kinotz/WorkSpace/C++/Part04/Chapter11/Question11-1/q1",
             "args": [],
             "stopAtEntry": false,
             "cwd": "${workspaceFolder}",
