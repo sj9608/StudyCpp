@@ -134,3 +134,10 @@ operator<<(cout, pos);
 ostream& operator<<(ostream& os, const Point& pos)
 
 > 03_PointConsoleOutput.cpp 예제를 작성 및 확인하자.
+
+---
+이제 Point 클래스를 대상으로 한 >> 연산자의 오버로딩에 대해서 살펴 볼 차례이다. 다음의 정보에 맞게 직접 해결해보자.
+* cin은 istream 클래스의 객체이다.
+* istream은 이름공간 std안에 선언되어 있으며, 이의 사용을 위해서는 헤더파일 iostream을 포함해야 한다.
+
+문제 10-3 [입력을 위한 >> 연산자의 오버로딩]
