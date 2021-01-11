@@ -34,6 +34,29 @@ public:
             pistol = NULL;
         }
     }
+
+    Police(const Police& ref)
+        : handcuffs(ref.handcuffs)
+    {
+        if(pistol != NULL)
+            pistol = new Gun(*ref.pistol);
+        else
+            pistol = NULL;
+    }
+
+    Police& operator=(const Police& ref)
+    {
+        if(pistol != NULL)
+            delete pistol;
+        if(ref.pistol != NULL)    
+            pistol = new Gun(*ref.pistol);
+        else 
+            pistol = NULL;
+            
+        handcuffs = ref.handcuffs;
+        return *this;
+    }
+
     void Shot()
     {
         if(pistol== NULL)
@@ -59,9 +82,15 @@ int main(void)
     Police pman1(5, 3);
     Police pman2 = pman1;
 
+    pman2.PutHandcuff();
+    pman2.PutHandcuff();
+
     Police pman3(1, 4);
     pman3 = pman1;
     
+    pman3.Shot();
+    pman3.Shot();
+    pman3.Shot();
     
     return 0;
 }
