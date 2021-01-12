@@ -97,3 +97,29 @@ ShowAllData(const BoundCheckIntArray& ref)
 main 함수에서 arr[i] = (i+1) * 11; 구문에선 const로 선언되지 않는 arr을 이용한 연산이니 일반 함수가 호출된다.
 
 위 예제를 하나의 모델로해서 const 기반의 함수 오버로딩이 유용하게 사용될 수 있음을 기억하자.
+
+**객체의 저장을 위한 배열 클래스의 정의**
+앞서 보인 예제는 기본 자료형(int) 대상 배열 클래스 였기 때문에, 이번엔 객체 대상의 배열 클래스를 제시하고자 한다. 저장의 대상은 당므과 같다.
+
+``` C++
+class Point
+{
+private:
+    int xpos, ypos;
+public:
+    Point(int x = 0, int y = 0) : xpos(x), ypos(y) { }
+    friend ostream& operator<<(ostream& os, const Point& pos)
+};
+ostream& operator<<(ostream& os, const Point& pos)
+{
+    os << '[' << pos.xpos << ", " << pos.ypos << endl;
+    return os;   
+};
+```
+위 클래스의 객체를 저장할 수 있는 배열 클래스를 정의하되, 다음의 두 가지 형태로 각각 정의해 보고자 한다.
+* Point 객체의 주소 값을 저장하는 배열 기반의 클래스
+* Point 객체를 저장하는 배열 기반의 클래스
+
+즉, 저장의 대상이 객체이냐, 객체의 주소 값이냐 에 차이가 있는 것 이다. 먼저 Point 객체를 저장하는 배열 기반의 클래스를 확인하자.
+
+> 04_StablePointObjArray.cpp
