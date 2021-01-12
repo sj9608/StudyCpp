@@ -88,3 +88,12 @@ ref.operator[ ](idx);
 그리고 이로 인해서 위에 보인 예제는 다음의 예제와 같이 확장이 가능하다.
 이 예제에서는 const의 선언 유무로서 operator[ ]함수를 오버로딩 하고있다.
 > 03_StableConstArraySolu.cpp
+
+위 예제에서 int형을 반환하는 operator[ ] (int idx) const 함수가 추가 되었다.
+이 함수는 int& 형을 반환하는 operator[ ] (int idx) 와 오버로딩의 관계를 가지며 배열 요소의 값을 단순히 반환하는 형태로 정의 되었다.
+
+ShowAllData(const BoundCheckIntArray& ref)
+함수에서 const 참조자를 이용한 연산을 하였으므로 const 함수가 호출되며
+main 함수에서 arr[i] = (i+1) * 11; 구문에선 const로 선언되지 않는 arr을 이용한 연산이니 일반 함수가 호출된다.
+
+위 예제를 하나의 모델로해서 const 기반의 함수 오버로딩이 유용하게 사용될 수 있음을 기억하자.
