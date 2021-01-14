@@ -1,4 +1,4 @@
-Chpater 12 Strign 클래스의 디자인
+Chpater 12 String 클래스의 디자인
 ---
 
 #### 12-1 C++의 표준과 표준 string 클래스
