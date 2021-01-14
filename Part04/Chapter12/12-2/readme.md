@@ -54,3 +54,64 @@ string 객체를 대상으로 << 연산자를 이용한 출력과 >> 연산자�
 위에서 정리한 6가지 기능을 모두 완성해서 String 클래스를 정의하면 예제 01_STDString.cpp에서 표준 string 클래스를 대체할 수 있다. 
 
 직접 위의 기능을 가진 String 클래스를 정의해 보고 다음과 비교해보자.
+
+---
+
+**StringAns.cpp 예제 부연 설명**
+디폴트 생성자를 확인해보면 다음과 같은 형태로 정의 되어있다.
+``` C++
+String()
+{
+    len = 0;
+    str = NULL;
+}
+```
+이는 문자열을 입력 받을 목적으로, 다음의 형태로 객체를 생성할 수 있게 하기 위해서 정의된 생성자 이다.
+
+``` C++
+String emptyStr;
+```
+때문에 멤버변수 str에는 NULL 이 저장될 수도 있다. 그래서 멤버변수 str을 대상으로 delete 연산을 하기에 앞서, str에 저장된 값이 NULL 인지를 검사하는 코드를 소멸자에 포함해서 곳곳에서 확인할 수 있다.
+그리고 복사 생성자, 대입 연산자는 깊은 복사를 진행하도록 정의되었다는 점을 제외하곤 특별할게 없다.
+
+이번에는 오버로딩된 + 연산자를 보자.
+
+``` C++
+String operator+(const String& s)
+{
+    char *tempstr = new char[len + s.len - 1];
+    strcpy(tempstr, str);
+    strcat(tempstr, s.str);
+
+    String temp(tempstr);
+    delete []tempstr;
+    return temp;
+}
+```
+'+' 연산자의 본래 목적은 새로운 값을 만들어내는 연산자이지, 피연산자의 값을 변경시키는 연산자가 아니기 때문에 const 선언을 하였고 피연산자의 정보를 참조해서 새로운 객체를 만들어 반환하고 있다. 그리고 할당할 메모리 공간의 길이를 계산하는데 있어 -1을 한 이유는 멤버변수 len에 저장된 문자열의 길이 정보 끝을 의미하는 NULL 문자도 포함되어 있기 때문이다. NULL 이 두 번 계산되었으니, 하나를 빼야 한다.
+
+다음은 += 연산자의 오버로딩 결과이다.
+``` C++
+String& operator+=(const String& s)
+{
+    len += (s.len - 1);
+    char* tempstr = new char[len];
+    strcpy(tempstr, str);
+    strcat(tempstr, s.str);
+
+    if(str != NULL)
+        delete []str;
+    str = tempstr;
+    return *this;
+}
+```
+위 함수에서, 배열은 확장이 불가능하기 때문에 덧붙여질 문자열의 길이를 감안해서 배열을 재할당한 다음에, 원본 문자열을 복사하고, 추가할 문자열을 덧붙이고 있다. 참고로 위 예제에서 정의한 += 연산자는 오버로딩된 +연산자를 이용해 다음과 같이 간단하게도 정의가 가능하다.
+
+``` C++
+String& operator+=(const String& s)
+{
+    *this = *this + s;
+    return *this;
+}
+```
+이러한 형태의 정의는 간결해 보이고 이해하기도 좋지만, 덧셈의 과정에서 객체가 추가로 생성되는 단점이 있다. 하지만 컴퓨팅 파워가 좋은 환경이라면 이 정도는 단점이 될 수 없으니, 이러한 형태의 구현도 생각해볼 만하다.
