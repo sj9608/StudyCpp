@@ -9,8 +9,8 @@ class BoundCheckAccountPtrArray
 private:
     ACCOUNT_PTR *arr;
     int arrlen;
-    BoundCheckAccountPtrArray(const BoundCheckAccountPtrArray& arr) { }
-    BoundCheckAccountPtrArray& operator=(const BoundCheckAccountPtrArray& arr) {return;}
+    BoundCheckAccountPtrArray(const BoundCheckAccountPtrArray& arr);
+    BoundCheckAccountPtrArray& operator=(const BoundCheckAccountPtrArray& arr);
 public:
     BoundCheckAccountPtrArray(int len = 100);
     ACCOUNT_PTR& operator[](int idx);
