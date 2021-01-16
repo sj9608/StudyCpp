@@ -145,3 +145,23 @@ int main(void)
 
 > 02_TwoTypeAddFunction.cpp
 
+이 예제에서는 함수 템플릿을 정의한 상황에서 일반함수까지 정의하는 것은 바람직하지 못하다는 사실과 컴파일러에 의해 만들어지는 템플릿 함수가 일반함수와 구분된다는 사실을 보여준다.
+
+**둘이상의 형(Type)에 대해 템플릿 선언하기**
+
+> 03_PrimitiveFunctionTemplate.cpp
+
+위 처럼 함수 템플릿 선언시 둘 이상의 템플릿 타입을 명시할 수 있다. 그리고 typename 대신 키워드 class를 사용할 수 있다.
+
+``` C++
+void ShowData(double num)
+{
+    cout << (T1)num << ", " << (T2)num << endl;
+    위 함수는 아래와 같이 대체할 수 있다.
+    cout << T1(num) << ", " << T2(num) << endl;
+}
+```
+데이터에 소괄호를 묶는 형태로 형변환을 명령할 수 잇다. 즉, 
+int num = (int)3.14;
+int num = int(3.14); 
+두 문장은 완전히 일치한다.
