@@ -165,3 +165,28 @@ void ShowData(double num)
 int num = (int)3.14;
 int num = int(3.14); 
 두 문장은 완전히 일치한다.
+
+**함수 템플릿의 특수화(Specialization)**
+이번에는 '함수 템플릿의 특수화'라는 것에 대해 설명할 텐데, 이에 앞서 다음 에제와 실행결과를 관측해보자.
+> 04_NeedSpecialFunctionTemplate.cpp
+
+위 예제의 Max 함수는 전달된 두 인자 데이터 중 큰 값을 반환하도록 정의되어 있지만 문자열 대상으로 호출할 경우엔 단순히 주소값의 비교결과가 반환되므로 의미를 부여할 수 없다. 만약 문자열 길이의 비교가 목적이라면 다음의 형태로 템플릿 함수가 구성되어야 의미가 있다.
+
+``` C++
+const char* Max(const char *a, const char *b)
+{
+    return strlen(a) > strlen(b) ? a : b ;
+}
+```
+
+사전 순서 비교가 목적이라면 다음 형태로 템플릿 함수가 구성되어야 의미가 있다.
+``` C++
+const char* Max(const char *a, const char *b)
+{
+    return strcmp(a, b) > 0 ? a : b ;
+}
+```
+
+이처럼 상황에 따라 함수의 구성방법에 예외를 둘 필요가 있는데, 이때 사용되는 것이 '함수 템플릿의 특수화' 이다. 다음 예제를 확인하자.
+
+> 05_SpecialFunctionTemplate.cpp
