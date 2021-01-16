@@ -181,7 +181,7 @@ const char* Max(const char *a, const char *b)
 
 사전 순서 비교가 목적이라면 다음 형태로 템플릿 함수가 구성되어야 의미가 있다.
 ``` C++
-const char* Max(const char *a, const char *b)
+char* Max(const char *a, const char *b)
 {
     return strcmp(a, b) > 0 ? a : b ;
 }
@@ -190,3 +190,23 @@ const char* Max(const char *a, const char *b)
 이처럼 상황에 따라 함수의 구성방법에 예외를 둘 필요가 있는데, 이때 사용되는 것이 '함수 템플릿의 특수화' 이다. 다음 예제를 확인하자.
 
 > 05_SpecialFunctionTemplate.cpp
+
+``` C++
+template <>
+char * Max(char * a, char * b)
+{
+    . . .
+}
+```
+위의 정의는 컴파일러에게 다음의 메세지를 전달하는 것이다.
+
+> char* 형 함수는 내가 이렇게 제시를 하니, char * 형 템플릿함수가 필요한 경우에는 별도로 만들지 말고 위에 정의한것을 사용해라. 마찬가지로 const char* 형도 따로 정의해두었다.
+
+그리고 이 두 '함수 템플릿의 특수화' 정의형태는, 특수화 하는 자료형의 정보 char* 와 const char*를 생략한 형태이며, 이를 생략하지 않고 정의하면 다음의 형태가 된다.
+
+``` C++
+template <>
+char * Max<char *>(char * a, char * b) { . . . }
+template <>
+const char * Max(const char * a, const char * b) { . . . }
+```
