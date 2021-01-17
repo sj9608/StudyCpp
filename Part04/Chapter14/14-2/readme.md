@@ -62,3 +62,9 @@ class MySimple<T1, int> { . . . }
 이를 가리켜 **' 클래스 템플릿의 부분 특수화 '** 라고 한다. 예제를 통해서 이를 확인해보자.
 
 > 02_ClassTemplatePartialSpecialization.cpp
+
+위 예제에서
+<int, double> 과 같은 전체 특수화와
+<T1, double> 과 같은 부분 특수화를 동시에 정의하였는데
+이 경우엔 전체 특수화가 부분 특수화 보다 우선시 된다.
+> **전체 특수화 > 부분 특수화**
